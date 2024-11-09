@@ -1,9 +1,9 @@
-cmake_minimum_required (VERSION 3.10)
+cmake_minimum_required (VERSION 3.17) # Required for Ninja Multi-Config
 
 message (STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 project (wasi-helloworld)
 
-set (CMAKE_CXX_STANDARD 23)
+set (CMAKE_CXX_STANDARD 20)
 set (CMAKE_CXX_STANDARD_REQUIRED ON)
 set (CMAKE_EXECUTABLE_SUFFIX_CXX .wasm)
 
