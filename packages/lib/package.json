@@ -1,0 +1,31 @@
+{
+  "name": "lib",
+  "type": "module",
+  "scripts": {
+    "postinstall": "cmake-js --config Debug --out build/native -G 'Ninja Multi-Config' --CDCMAKE_TOOLCHAIN_FILE=${EMSCRIPTEN_SDK_PATH}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake compile",
+    "check": "tsc --build",
+    "build:debug": "cmake --build build/native --config Debug",
+    "build:release": "cmake --build build/native --config Release",
+    "build": "pnpm check && pnpm build:release && vite build",
+    "test": "vitest",
+    "test:debug": "vitest --inspect-brk --test-timeout=600000 --no-file-parallelism"
+  },
+  "exports": {
+    ".": {
+      "types": "./build/dts/index.d.ts",
+      "development": "./src/index.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "imports": {
+    "#wasi-helloworld.wasm": "./build/native/wasi-helloworld.wasm"
+  },
+  "devDependencies": {
+    "cmake-js": "^7.3.0",
+    "tinywasi": "git+https://github.com/qrdate/tinywasi.git",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.10",
+    "vitest": "^2.1.4"
+  },
+  "packageManager": "pnpm@9.12.3"
+}

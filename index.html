@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>wasi/vite isomorphic skeleton</title>
+    <style>
+      * { font-family: monospace; }
+      body { margin: 1em; }
+    </style>
+  </head>
+  <body>
+    <p>
+      <span>Input</span>&nbsp;
+      <input type="number" id="number-input" value="9"/>
+    </p>
+    <p>
+      <span>Output</span>&nbsp;
+      <span id="number-output"></span>
+    </p>
+    <script type="module">
+      import './src/main.ts';
+    </script>
+  </body>
+</html>
