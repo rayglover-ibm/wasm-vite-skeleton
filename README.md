@@ -36,7 +36,7 @@
 
 #### _In chrome I get an error when debugging:_
 ```
-[C/C++ DevTools Support (DWARF)] Failed to load debug symbols for http://localhost:5173/packages/lib/build/native/Debug/wasi-helloworld.wasm?init (TypeError: Failed to fetch)
+[C/C++ DevTools Support (DWARF)] Failed to load debug symbols for http://localhost:5173/packages/lib/build/native/Debug/wasi-lib.wasm?init (TypeError: Failed to fetch)
 ```
 The `.dwp` (which contains the debug symbols) is referenced by the `.wasm` as a `file:///` scheme URI, which by default can't be loaded by extensions in recent version of Chrome.
 

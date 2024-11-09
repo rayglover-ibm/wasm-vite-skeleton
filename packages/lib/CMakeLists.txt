@@ -1,14 +1,14 @@
 cmake_minimum_required (VERSION 3.17) # Required for Ninja Multi-Config
 
 message (STATUS "Build type: ${CMAKE_BUILD_TYPE}")
-project (wasi-helloworld)
+project (wasi-lib)
 
 set (CMAKE_CXX_STANDARD 20)
 set (CMAKE_CXX_STANDARD_REQUIRED ON)
 set (CMAKE_EXECUTABLE_SUFFIX_CXX .wasm)
 
 set (SOURCES
-  "./src/hello.cc"
+  "./src/index.cc"
 )
 
 add_executable (${PROJECT_NAME} ${SOURCES})
@@ -68,7 +68,7 @@ target_link_options (${PROJECT_NAME} PUBLIC
 
 # Generate a symlink to the .wasm referenced by the package.json
 add_custom_target (link ALL
-  COMMENT "Configuring #wasi-helloworld.wasm"
+  COMMENT "Configuring imports.#${PROJECT_NAME}.wasm"
   COMMAND ${CMAKE_COMMAND} -E create_symlink
     $<TARGET_FILE:${PROJECT_NAME}>
     ${CMAKE_CURRENT_BINARY_DIR}/$<TARGET_FILE_NAME:${PROJECT_NAME}>

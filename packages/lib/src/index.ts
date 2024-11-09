@@ -1,5 +1,5 @@
 import { TinyWASI } from 'tinywasi';
-import init from '#wasi-helloworld.wasm?init';
+import init from '#wasi-lib.wasm?init';
 
 export interface API extends WebAssembly.Exports {
   multiply(a: number): bigint

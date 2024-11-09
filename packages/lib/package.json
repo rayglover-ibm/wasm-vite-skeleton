@@ -18,7 +18,7 @@
     }
   },
   "imports": {
-    "#wasi-helloworld.wasm": "./build/native/wasi-helloworld.wasm"
+    "#wasi-lib.wasm": "./build/native/wasi-lib.wasm"
   },
   "devDependencies": {
     "cmake-js": "^7.3.0",
