@@ -24,8 +24,8 @@ importers:
         specifier: ^7.3.0
         version: 7.3.0
       tinywasi:
-        specifier: git+https://github.com/qrdate/tinywasi.git
-        version: https://codeload.github.com/qrdate/tinywasi/tar.gz/969be20c46f689d283d477626db7df2640da1bb7
+        specifier: git+https://github.com/rayglover-ibm/tinywasi.git#feat/environ
+        version: https://codeload.github.com/rayglover-ibm/tinywasi/tar.gz/f52ec64e538c5c458e0e8969a4d5be2f519e92e5
       typescript:
         specifier: ^5.6.3
         version: 5.6.3
@@ -624,10 +624,10 @@ packages:
     resolution: {integrity: sha512-n1cw8k1k0x4pgA2+9XrOkFydTerNcJ1zWCO5Nn9scWHTD+5tp8dghT2x1uduQePZTZgd3Tupf+x9BxJjeJi77Q==}
     engines: {node: '>=14.0.0'}
 
-  tinywasi@https://codeload.github.com/qrdate/tinywasi/tar.gz/969be20c46f689d283d477626db7df2640da1bb7:
-    resolution: {tarball: https://codeload.github.com/qrdate/tinywasi/tar.gz/969be20c46f689d283d477626db7df2640da1bb7}
+  tinywasi@https://codeload.github.com/rayglover-ibm/tinywasi/tar.gz/f52ec64e538c5c458e0e8969a4d5be2f519e92e5:
+    resolution: {tarball: https://codeload.github.com/rayglover-ibm/tinywasi/tar.gz/f52ec64e538c5c458e0e8969a4d5be2f519e92e5}
     version: 1.0.2
-    engines: {node: ^14.19.0 || >=16.0.0}
+    engines: {node: '>=17.4.0'}
 
   typescript@5.6.3:
     resolution: {integrity: sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw==}
@@ -1235,7 +1235,7 @@ snapshots:
 
   tinyspy@3.0.2: {}
 
-  tinywasi@https://codeload.github.com/qrdate/tinywasi/tar.gz/969be20c46f689d283d477626db7df2640da1bb7: {}
+  tinywasi@https://codeload.github.com/rayglover-ibm/tinywasi/tar.gz/f52ec64e538c5c458e0e8969a4d5be2f519e92e5: {}
 
   typescript@5.6.3: {}
 

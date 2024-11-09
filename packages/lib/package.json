@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "cmake-js": "^7.3.0",
-    "tinywasi": "git+https://github.com/qrdate/tinywasi.git",
+    "tinywasi": "git+https://github.com/rayglover-ibm/tinywasi.git#feat/environ",
     "typescript": "^5.6.3",
     "vite": "^5.4.10",
     "vitest": "^2.1.4"
