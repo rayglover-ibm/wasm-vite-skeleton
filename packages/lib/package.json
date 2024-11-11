@@ -2,13 +2,14 @@
   "name": "lib",
   "type": "module",
   "scripts": {
-    "postinstall": "cmake-js --config Debug --out build/native -G 'Ninja Multi-Config' --CDCMAKE_TOOLCHAIN_FILE=${EMSCRIPTEN_SDK_PATH}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake compile",
     "check": "tsc --build",
     "build:debug": "cmake --build build/native --config Debug",
     "build:release": "cmake --build build/native --config Release",
     "build": "pnpm check && pnpm build:release && vite build",
     "test": "vitest",
-    "test:debug": "vitest --inspect-brk --test-timeout=600000 --no-file-parallelism"
+    "test:debug": "vitest --inspect-brk --test-timeout=600000 --no-file-parallelism",
+    "preinstall": "cmake-js --out build/native -G 'Ninja Multi-Config' --CDCMAKE_TOOLCHAIN_FILE=${EMSCRIPTEN_SDK_PATH}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake configure",
+    "postinstall": "pnpm build"
   },
   "exports": {
     ".": {
