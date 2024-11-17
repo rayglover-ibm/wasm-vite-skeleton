@@ -1,15 +1,14 @@
 {
   "name": "lib",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "check": "tsc --build",
-    "build:debug": "cmake --build build/native --config Debug",
-    "build:release": "cmake --build build/native --config Release",
-    "build": "pnpm check && pnpm build:release && vite build",
+    "build:native": "cmake --build build/native",
+    "build": "pnpm build:native --config Release && vite build",
     "test": "vitest",
     "test:debug": "vitest --inspect-brk --test-timeout=600000 --no-file-parallelism",
-    "preinstall": "cmake-js --out build/native -G 'Ninja Multi-Config' --CDCMAKE_TOOLCHAIN_FILE=${EMSCRIPTEN_SDK_PATH}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake configure",
-    "postinstall": "pnpm build"
+    "prepare": "cmake-js --out build/native -G 'Ninja Multi-Config' --CDCMAKE_TOOLCHAIN_FILE=${EMSCRIPTEN_SDK_PATH}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake configure",
+    "prepack": "pnpm build"
   },
   "exports": {
     ".": {
@@ -25,8 +24,15 @@
     "cmake-js": "^7.3.0",
     "tinywasi": "git+https://github.com/rayglover-ibm/tinywasi.git#feat/environ",
     "typescript": "^5.6.3",
+    "esbuild": "^0.24.0",
     "vite": "^5.4.10",
-    "vitest": "^2.1.4"
+    "vitest": "^2.1.5",
+    "vite-plugin-dts": "^4.3.0"
   },
-  "packageManager": "pnpm@9.12.3"
+  "packageManager": "pnpm@9.12.3",
+  "files": [
+    "./dist",
+    "./build/dts",
+    "./package.json"
+  ]
 }

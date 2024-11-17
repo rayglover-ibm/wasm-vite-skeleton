@@ -1,26 +1,27 @@
 {
   "compilerOptions": {
     "target": "ES2023",
-    "module": "ESNext",
+    "module": "NodeNext",
     "lib": ["ES2023", "DOM"],
     "skipLibCheck": true,
+    "rootDir": "./src",
 
-    /* Bundler mode */
-    "moduleResolution": "Bundler",
+    "moduleResolution": "NodeNext",
     "isolatedModules": true,
     "moduleDetection": "force",
 
     /* Linting */
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
 
+    /* declaration */
     "declaration": true,
+    "declarationMap": true,
     "emitDeclarationOnly": true,
     "declarationDir": "build/dts"
   },
 
-  "include": ["src"],
+  "include": ["./src/*"],
+  "exclude": ["**/*.test.ts"]
 }

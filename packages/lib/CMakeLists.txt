@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.17) # Required for Ninja Multi-Config
+cmake_minimum_required (VERSION 3.19) # Required for Ninja Multi-Config and create_hardlink
 
 message (STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 project (wasi-lib)
@@ -39,7 +39,7 @@ target_link_options (${PROJECT_NAME} PUBLIC
   -s ALLOW_MEMORY_GROWTH=1
   -s INITIAL_MEMORY=512kb
   -s MAXIMUM_MEMORY=128mb
-  -s EXPORTED_FUNCTIONS='[\"_malloc\",\"_free\"]'
+  -s EXPORTED_FUNCTIONS='[\"_malloc\",\"_free\",\"_malloc_usable_size\"]'
   -s STANDALONE_WASM=1
   -s WASM_BIGINT=1
   -s ASSERTIONS=1
@@ -69,7 +69,7 @@ target_link_options (${PROJECT_NAME} PUBLIC
 # Generate a symlink to the .wasm referenced by the package.json
 add_custom_target (link ALL
   COMMENT "Configuring imports.#${PROJECT_NAME}.wasm"
-  COMMAND ${CMAKE_COMMAND} -E create_symlink
+  COMMAND ${CMAKE_COMMAND} -E create_hardlink
     $<TARGET_FILE:${PROJECT_NAME}>
     ${CMAKE_CURRENT_BINARY_DIR}/$<TARGET_FILE_NAME:${PROJECT_NAME}>
 )
