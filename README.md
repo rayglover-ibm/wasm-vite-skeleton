@@ -1,11 +1,12 @@
 # (Node/Browser) Emscripten + Vite skeleton lib/app
 ### This skeleton monorepo demonstrates:
 
-#### An isomorphic (Node/browser) JS/Wasm package with a minimal browser-compatible WASI implementation.
+#### An isomorphic (Node/browser) TS/C++ library package with a minimal browser-compatible WASI implementation.
 - This WASI runtime supports basic io/clock/random APIs and should be sufficient for most needs. This means the runtime overhead is <1KB minified JS.
 - See [packages/lib](./packages/lib)
 
 #### Running tests in Nodejs with Vitest
+- Run `pnpm test` from `packages/lib` to run the tests
 - The WASM can be debugged within VSCode with the [WebAssembly DWARF Debugging](https://marketplace.visualstudio.com/items?itemName=ms-vscode.wasm-dwarf-debugging) extension. The (potentially large) about of debug information is split in to a separate DWARF package (.dwp), reducing build times and other overheads.
 
 #### Consuming the library in a Vite browser app
@@ -16,14 +17,14 @@
 
 - Clone the repo
 - Install CMake (3.17+) and Ninja
-- Install the Emscripten SDK. Make sure your `EMSCRIPTEN_SDK_PATH` environment variable is configured correctly.
+- Install the Emscripten SDK. Make sure your `EMSDK` environment variable is configured correctly. (This can be done by running the `emsdk_env` script)
 - `pnpm install` - Installs packages and configures the CMake project in the `lib` package and compiles a binary in debug mode.
 - `pnpm dev` - Starts the vite dev server in dev mode
 - `pnpm build` - Builds a distribution for each package. The `lib` package is recompiled in Release mode.
 
 ### Libraries/Tools/SDKs Used
 
-- Emscripten
+- Emscripten SDK
 - Node.js, TypeScript 
 - Vite, Vitest
 - CMake, Ninja, Clang
