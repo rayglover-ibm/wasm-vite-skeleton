@@ -2,12 +2,28 @@ import { TinyWASI } from 'tinywasi';
 
 type TypedArray = Uint8Array | Int8Array | Uint32Array | Int32Array | Float32Array | Float64Array;
 
+export type PtrScalarTag = 'i8' | 'u8' | 'i32' | 'u32' | 'f32' | 'f64';
+
+type PtrTag = PtrScalarTag | TypedArray;
+
+type TagFromTypedArray<T extends TypedArray> =
+  T extends Int8Array ? 'i8' :
+  T extends Uint8Array ? 'u8' :
+  T extends Int32Array ? 'i32' :
+  T extends Uint32Array ? 'u32' :
+  T extends Float32Array ? 'f32' :
+  T extends Float64Array ? 'f64' :
+  never;
+
 type TypedArrayConstructor<T extends TypedArray> = {
   new (buffer: ArrayBuffer, offset?: number, length?: number): T;
   BYTES_PER_ELEMENT: number;
 };
 
-export type Ptr = number & { __brand: symbol };
+export type Ptr<Tag extends PtrTag = PtrTag> = number & {
+  readonly __brand: unique symbol;
+  readonly __tag?: Tag extends TypedArray ? TagFromTypedArray<Tag> : Tag;
+};
 
 export interface EmscriptenExports extends WebAssembly.Exports {
   readonly memory: WebAssembly.Memory;
@@ -22,8 +38,13 @@ export interface Instance<T extends EmscriptenExports> extends WebAssembly.Insta
 
 export class MemoryUtil {
   constructor(private readonly exports: EmscriptenExports) {}
+
+  ensureOwnership(arr: TypedArray) {
+    if (arr.buffer !== this.exports.memory.buffer) throw new Error('Invalid buffer');
+  }
+
   viewOf<T extends TypedArray>(
-    ptr: Ptr,
+    ptr: Ptr<T>,
     ctor: TypedArrayConstructor<T>,
     elements: number
   ): T {
@@ -42,7 +63,8 @@ export class MemoryUtil {
   }
 
   freeArray<T extends TypedArray>(arr: T) {
-    this.exports.free(arr.byteOffset as Ptr);
+    this.ensureOwnership(arr);
+    this.exports.free(arr.byteOffset as Ptr<T>);
   }
 
   freeAll(...ptr: Ptr[]): void {
@@ -51,6 +73,11 @@ export class MemoryUtil {
 
   sizeOf(ptr: Ptr) {
     return this.exports.malloc_usable_size(ptr);
+  }
+
+  asPtr<T extends TypedArray>(arr: T): Ptr<T> {
+    this.ensureOwnership(arr);
+    return arr.byteOffset as Ptr<T>;
   }
 }
 

@@ -3,9 +3,10 @@ cmake_minimum_required (VERSION 3.19) # Required for Ninja Multi-Config and crea
 message (STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 project (wasi-lib)
 
-set (CMAKE_CXX_STANDARD 20)
+set (CMAKE_CXX_STANDARD 23)
 set (CMAKE_CXX_STANDARD_REQUIRED ON)
 set (CMAKE_EXECUTABLE_SUFFIX_CXX .wasm)
+set (CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set (SOURCES
   "./src/index.cc"
@@ -27,7 +28,7 @@ target_compile_options (${PROJECT_NAME} PUBLIC
 )
 
 target_compile_definitions (${PROJECT_NAME} PUBLIC
-  $<$<CONFIG:Debug>: _LIBCPP_ENABLE_ASSERTIONS=1>
+  $<$<CONFIG:Debug>: _LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_EXTENSIVE>
 )
 
 target_link_options (${PROJECT_NAME} PUBLIC

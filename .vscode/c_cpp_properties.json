@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "name": "Emscripten",
+            "compilerArgs": [
+                "--target=wasm64-unknown-emscripten"
+            ],
+            "compilerPath": "${env:EMSDK}/upstream/emscripten/em++",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${env:EMSDK}/upstream/emscripten/cache/sysroot/include/**",
+                "${env:EMSDK}/upstream/emscripten/system/include/**"
+            ],
+            "defines": [
+                "__EMSCRIPTEN__",
+                "EMSCRIPTEN"
+            ],
+            "cStandard": "c17",
+            "cppStandard": "c++23",
+            "intelliSenseMode": "macos-clang-arm64"
+        }
+    ],
+    "version": 4
+}

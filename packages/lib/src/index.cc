@@ -1,23 +1,20 @@
-#include <iostream>
-#include <chrono>
-
-/** Utility macros to import and export function from/to JavaScript. */
-#define WASM_EXPORT(name) __attribute__((export_name(#name)))
-#define WASM_IMPORT(module, name) __attribute__((import_module(#module), import_name(#name)))
+#include <span>
+#include "./util.h"
 
 int WASM_IMPORT(js, getValue) getValue(void);
 
-/**
- * Multiplies a user supplied value with an imported value. Returns an int64
- * (a bigint on the JavaScript side)
- */
 std::int64_t WASM_EXPORT(multiply) multiply(int a) {
   int value = getValue();
-
-#ifndef NDEBUG
-  std::cout << std::format("[DEBUG {:%d-%m-%Y %T}]", std::chrono::system_clock::now())
-            << std::format(" multiply({}x{})\n", value, a);
-#endif
+  debug_println("multiply({}x{})", value, a);
 
   return value * a;
+}
+
+std::int32_t WASM_EXPORT(sumi32) sumi32(const int32_t* ptr, int32_t len) {
+  debug_println("sumi32({}, {})", static_cast<const void*>(ptr), len);
+  std::span<const int32_t> xs(ptr, len);
+
+  std::int32_t sum = 0;
+  for (std::int32_t x : xs) sum += x;
+  return sum;
 }
