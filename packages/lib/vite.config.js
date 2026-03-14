@@ -25,8 +25,5 @@ export default defineConfig({
         },
       ],
     },
-  },
-  test: {
-    setupFiles: 'test/nodeWasmFetch.js',
-  },
+  }
 });
