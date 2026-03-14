@@ -16,5 +16,5 @@ test('sum()', async () => {
   const sum = exports.sumi32(memory.asPtr(xs), N);
   memory.freeArray(xs);
 
-  expect(sum).toEqual(((1 + N) / 2) * 5);
+  expect(sum).toEqual(Math.floor(((1 + N) / 2) * N));
 });
